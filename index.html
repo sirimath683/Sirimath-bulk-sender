@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sirimath | Bulk Pro</title>
+    <style>
+        /* Modern Gradient Background */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #4c1d95, #1e3a8a);
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .main-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 40px; /* Rounded corners */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            animation: pop 0.5s ease-out;
+        }
+
+        @keyframes pop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .brand-title { font-size: 1.6rem; font-weight: 800; color: #38bdf8; margin-bottom: 5px; text-transform: uppercase; }
+        .tagline { font-size: 0.75rem; color: #94a3b8; margin-bottom: 25px; }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; /* Rounded Input */
+            color: white;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus { border: 1px solid #38bdf8; }
+
+        .list-box {
+            background: rgba(0,0,0,0.4);
+            padding: 12px;
+            border-radius: 20px;
+            border: 1px dashed #334155;
+            margin-bottom: 15px;
+            font-size: 0.7rem;
+            color: #64748b;
+            min-height: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            padding: 15px;
+            border-radius: 50px; /* Fully Rounded Button */
+            border: none;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.4s;
+            text-transform: uppercase;
+        }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0,114,255,0.5); }
+
+        .wa-logo {
+            margin-top: 30px;
+            display: inline-block;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .wa-logo:hover { transform: rotate(10deg) scale(1.1); }
+
+        .footer-text { margin-top: 25px; color: #475569; font-size: 0.7rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="main-card">
+    <div class="brand-title">SIRIMATH</div>
+    <div class="tagline">BULK MESSAGING SYSTEM</div>
+    
+    <input type="text" id="numbers" placeholder="Enter numbers (9477..., 9475...)" oninput="updateList()">
+    
+    <div class="list-box" id="listPreview">Ready to process...</div>
+    
+    <textarea id="msg" rows="3" placeholder="Type your message..."></textarea>
+    
+    <button class="btn" onclick="startSending()">Launch Send</button>
+
+    <div class="wa-logo" onclick="window.location.href='https://wa.me/94755409310'">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="45" alt="WhatsApp">
+    </div>
+
+    <div class="footer-text">© SIRIMATH 2026 | ALL RIGHTS RESERVED</div>
+</div>
+
+<script>
+    function updateList() {
+        let input = document.getElementById('numbers').value;
+        let listArea = document.getElementById('listPreview');
+        let nums = input.split(',').filter(n => n.trim() !== "");
+        listArea.innerHTML = nums.length > 0 ? "Targeting: " + nums.map(n => n.trim()).join(', ') : "Ready to process...";
+    }
+
+    function startSending() {
+        let nums = document.getElementById('numbers').value.split(',');
+        let msg = document.getElementById('msg').value;
+        nums.forEach((num, index) => {
+            let cleanNum = num.trim().replace('+', '');
+            setTimeout(() => {
+                window.open(`https://wa.me/${cleanNum}?text=${encodeURIComponent(msg)}`, '_blank');
+            }, index * 2000); 
+        });
+    }
+</script>
+</body>
+</html>
